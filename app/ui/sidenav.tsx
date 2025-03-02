@@ -27,6 +27,10 @@ const links = [
   {
     title: "Interest",
     href: "/interest"
+  },
+  {
+    title: "Daily",
+    href: "/daily"
   }
 ]
 

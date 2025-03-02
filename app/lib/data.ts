@@ -28,8 +28,13 @@ class Savings {
     let compoundInterest: CompoundInterest;
     // console.log("Remaining period : " + remainingPeriod);
 
-    let savingsWithIncome = values.income + values.incomeMonthly;
-    this.initTotalSavings += values.incomeMonthly;
+    let savingsWithIncome: number;
+    if (values.year == remainingPeriod) {
+      savingsWithIncome = values.income
+    } else {
+      savingsWithIncome = values.income + (values.incomeMonthly * 12);
+      this.initTotalSavings += (values.incomeMonthly * 12);
+    }
     compoundInterest = {
       year: (values.year - remainingPeriod + 1),
       initBalance: savingsWithIncome,
@@ -68,8 +73,16 @@ type CompoundInterest = {
   endBalance: number
 }
 
+type DailyValues = {
+  expenses: number,
+  savings: number,
+  mortgagePercent: number,
+  savingPercent: number,
+  expensePercent: number
+}
+
 // UNCOMMENT THIS TO EXPORT
-export type { Values, CompoundInterest};
+export type { Values, CompoundInterest, DailyValues };
 export { Savings };
 
 

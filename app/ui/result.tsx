@@ -3,6 +3,7 @@
 import { Values, CompoundInterest, Savings } from '@/app/lib/data';
 import { CompoundInterestTable } from '@/app/ui/compound_interest_table';
 import { Card, CardContent, CardHeader, Grid, Grid2 } from '@mui/material';
+import { MonthPlan } from '@/app/lib/daily';
 
 export function Result(props: { data: Values }) {
   if (props.data == null) {
@@ -16,7 +17,7 @@ export function Result(props: { data: Values }) {
   const elementsIncome = (
     <div className="mb-4">
       <label className="text-lg font-semibold text-gray-700">
-        Tabungan awal kamu adalah: <span className="font-normal">{props.data.income}</span>
+        Tabungan awal kamu adalah: <span className="font-normal">{props.data.income.toLocaleString()}</span>
       </label>
     </div>
   );
@@ -61,7 +62,7 @@ export function Result(props: { data: Values }) {
               titleTypographyProps={{ variant: 'h6', className: 'font-semibold text-gray-800' }}
             />
             <CardContent className="text-2xl font-bold text-gray-900">
-              Rp. {saving.initTotalSavings}
+              Rp. {saving.initTotalSavings.toLocaleString()}
             </CardContent>
           </Card>
         </Grid>
@@ -72,7 +73,7 @@ export function Result(props: { data: Values }) {
               titleTypographyProps={{ variant: 'h6', className: 'font-semibold text-gray-800' }}
             />
             <CardContent className="text-2xl font-bold text-gray-900">
-              Rp. {saving.endTotalSavings}
+              Rp. {saving.endTotalSavings.toLocaleString()}
             </CardContent>
           </Card>
         </Grid>
@@ -97,4 +98,35 @@ export function Result(props: { data: Values }) {
   elements.push(elementsFinal);
 
   return <div className="p-6 bg-gray-50 rounded-lg">{elements}</div>;
+}
+
+export function ResultDaily(props: { data: MonthPlan }) {
+  if (props.data == null) {
+    return
+  }
+
+  return(
+    <>
+      <Card className="shadow-lg rounded-lg">
+        <CardHeader
+          title="Rincian bulanan DENGAN GAJI AKTIF"
+          titleTypographyProps={{ variant: 'h6', className: 'font-semibold text-gray-800 '}}
+        />
+        <CardContent className="text-xl text-gray-900">
+          <div>
+            Total income : Rp. {props.data.income.toLocaleString()}
+          </div>
+          <div>
+            Jumlah expense : Rp. {props.data.data.expenses.toLocaleString()}
+          </div>
+          <div>
+            Jumlah cicilan : Rp. {props.data.mortgage.toLocaleString()}
+          </div>
+          <div>
+            Jumlah tabungan : Rp. {props.data.data.savings.toLocaleString()}
+          </div>
+        </CardContent>
+      </Card>
+    </>
+  )
 }
