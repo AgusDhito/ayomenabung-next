@@ -17,19 +17,14 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-
-// Define the type for an expense
-interface Expense {
-  name: string;
-  category: string;
-  currency: string;
-  amount: number;
-  
-}
+import { Expense } from "@/app/lib/data";
+import { BalanceForecast, ForecastRecord } from "@/app/lib/balance_forecast";
 
 function ExpensesForm() {
     const [expenses, setExpenses] = useState<Expense[]>([]);
     const [expense, setExpense] = useState<Expense>({ name: "", category: "Housing", currency: "IDR", amount: 0 })
+    const [expenseForecasts, setExpenseForecasts] = useState<Map<Expense, ForecastRecord[]>>(new Map<Expense, ForecastRecord[]>())
+    const [year, setYear] = useState<number>(0)
 
     function handleSelectChange(e: SelectChangeEvent) {
         const { name, value } = e.target
@@ -42,7 +37,6 @@ function ExpensesForm() {
         ))
     }
     function addExpense(formData: FormData) {
-        console.log(formData.get("name") as string)
         const newExpense: Expense = {
             name: formData.get("name") as string,
             category: formData.get("category") as string,
@@ -52,12 +46,20 @@ function ExpensesForm() {
 
         setExpenses((prevExpenses) => [...prevExpenses, newExpense])
     }
+
+    function reforecastBalance(e: React.ChangeEvent<HTMLInputElement>) {
+        let year = parseInt(e.target.value)
+        setYear(year)
+        const forecasts = new BalanceForecast(expenses)
+        setExpenseForecasts(forecasts.Forecast(year) as Map<Expense, ForecastRecord[]>)   
+    }
     return (
         <>
         <Box
             component="form"
             action={addExpense}
         >
+
             <TableContainer component={Paper}>
                 <Table className="min-w-full">
                     <TableHead>
@@ -70,6 +72,22 @@ function ExpensesForm() {
                     </TableHead>
 
                     <TableBody>
+                        <TableRow>
+                            <TableCell>
+                                <label className="text-gray-700 font-medium">Masukkan tahun :</label>
+                            </TableCell>
+                            <TableCell>
+                                <TextField
+                                    className="w-full" 
+                                    name="year" 
+                                    id="year" 
+                                    // required 
+                                    onChange={reforecastBalance}
+                                >
+                                </TextField>
+                            </TableCell>
+                        </TableRow>
+
                         {expenses.map((expense, index) => (
                             <TableRow key={index}>
                                 <TableCell className="py-4 text-gray-700">{expense.name}</TableCell>
@@ -113,7 +131,61 @@ function ExpensesForm() {
                 Add expense ++
             </Button>
         </Box>
+
+        {/* Divider */}
+        <div className="my-8">
+            <Divider className="bg-gray-300" />
+        </div>
         
+        {/* Table forecast */}
+        <Table className="min-w-full">
+            <TableHead>
+                {/* x = tahun */}
+                {/* y = kategorinya */}
+                <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Category</TableCell>
+                    <TableCell>Currency</TableCell>
+                    {
+                        (() => {
+                            const years = []
+                            for (let y = 1; y <= year; y++) {
+                                years.push(<TableCell>{"Year-"+y}</TableCell>)
+                            }
+                            return years
+                        })()
+                    }
+                </TableRow>
+            </TableHead>
+
+            <TableBody>
+                {
+                    (() => {
+                        let rows = []
+                        for (let [expense, forecastRecords] of expenseForecasts) {
+                            rows.push(
+                                <TableRow>
+                                    <TableCell>{expense.name}</TableCell>
+                                    <TableCell>{expense.category}</TableCell>
+                                    <TableCell>{expense.currency}</TableCell>
+                                    {
+                                        (() => {
+                                            let years = []
+                                            for (let index = 0; index < forecastRecords.length; index++) {
+                                                const record = forecastRecords[index];
+                                                years.push(<TableCell>{record.totalAmount}</TableCell>)
+                                            }
+                                            return years
+                                        })()
+                                    }
+                                </TableRow>
+                            )
+                        }
+                        return rows
+                    })()
+                }
+            </TableBody>
+        </Table>
         </>
     )
 };

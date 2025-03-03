@@ -81,8 +81,16 @@ type DailyValues = {
   expensePercent: number
 }
 
+// Define the type for an expense
+interface Expense {
+  name: string;
+  category: string;
+  currency: string;
+  amount: number; 
+}
+
 // UNCOMMENT THIS TO EXPORT
-export type { Values, CompoundInterest, DailyValues };
+export type { Values, CompoundInterest, DailyValues, Expense };
 export { Savings };
 
 
