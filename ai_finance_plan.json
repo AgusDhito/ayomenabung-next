@@ -1,0 +1,28 @@
+{
+  "monthly_budget": {
+    "housing": 4000000,
+    "utilities": 500000,
+    "food": 3000000,
+    "transportation": 1000000,
+    "mobile_internet": 600000,
+    "savings_investment": 2000000,
+    "entertainment_misc": 1500000,
+    "total_estimate": 12600000
+  },
+  "yearly_budget": {
+    "housing": 48000000,
+    "utilities": 6000000,
+    "food": 36000000,
+    "transportation": 12000000,
+    "mobile_internet": 7200000,
+    "savings_investment": 24000000,
+    "entertainment_misc": 18000000,
+    "total_estimate": 151200000
+  },
+  "recommendations": {
+    "housing": "Consider kosts or apartments in areas like Tebet or Pasar Minggu for better value.",
+    "mobile_internet": "Check for better packages from providers like Telkomsel, XL, or Indihome.",
+    "food": "Cooking at home can reduce costs to IDR 2.5M/month.",
+    "transportation": "Using MRT and TransJakarta can save up to 50% of costs compared to ride-hailing."
+  }
+}

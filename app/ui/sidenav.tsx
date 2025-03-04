@@ -25,13 +25,17 @@ import { green } from '@mui/material/colors';
 
 const links = [
   {
-    title: "Interest",
-    href: "/interest"
+    title: "Retirement Planning",
+    href: "/interest" 
   },
   {
-    title: "Daily",
+    title: "Budgeting",
     href: "/daily"
   }
+
+  // TODO :
+  // Financial Records : nanti bisa disatuin dengan budget & retirement planning apakah masih on-track atau tidak 
+  // Investment Planning : nanti ini setelah bunga deposito udah masuk, bisa masukin instrumen invest yang lain2 (obligasi, saham, etc.).
 ]
 
 const drawerWidth = 240;

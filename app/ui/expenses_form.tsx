@@ -50,6 +50,8 @@ function ExpensesForm() {
     function reforecastBalance(e: React.ChangeEvent<HTMLInputElement>) {
         let year = parseInt(e.target.value)
         setYear(year)
+
+        // console.log(expenses)
         const forecasts = new BalanceForecast(expenses)
         setExpenseForecasts(forecasts.Forecast(year) as Map<Expense, ForecastRecord[]>)   
     }
@@ -106,7 +108,15 @@ function ExpensesForm() {
                                 <TableCell>
                                     <Select name="category" value={expense.category} onChange={handleSelectChange}>
                                         <MenuItem value="Housing"> Housing </MenuItem>
-                                        <MenuItem value="Entertainment"> Entertainment </MenuItem>
+                                        <MenuItem value="Entertainment & Leisures"> Entertainment </MenuItem>
+                                        <MenuItem value="Groceries"> Groceries </MenuItem>
+                                        <MenuItem value="Transportation"> Transportation </MenuItem>
+                                        <MenuItem value="Mortgage"> Mortgage </MenuItem>
+                                        <MenuItem value="Debt"> Debt </MenuItem>
+                                        <MenuItem value="Tax"> Tax </MenuItem>
+                                        <MenuItem value="Services & Utilities"> Services & Utilities </MenuItem>
+                                        <MenuItem value="Skills"> Skills </MenuItem>
+                                        <MenuItem value="Shopping"> Shopping </MenuItem>
                                         {/* TODO add new category */}
                                     </Select>
                                 </TableCell>
@@ -173,7 +183,7 @@ function ExpensesForm() {
                                             let years = []
                                             for (let index = 0; index < forecastRecords.length; index++) {
                                                 const record = forecastRecords[index];
-                                                years.push(<TableCell>{record.totalAmount}</TableCell>)
+                                                years.push(<TableCell>{record.totalAmount.toLocaleString()}</TableCell>)
                                             }
                                             return years
                                         })()

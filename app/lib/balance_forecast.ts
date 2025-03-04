@@ -24,7 +24,7 @@ class BalanceForecast {
 
         for (let index = 0; index < this.formExpenses.length; index++) {
             let element = this.formExpenses[index]
-            accumulativeExpenses.set(element.name, 0)
+            accumulativeExpenses.set(element.name, element.amount * 12)
             forecastRecords.set(element, [{tenure: this.tenure, totalAmount: element.amount * 12, period: 1}])
             
         }
@@ -44,6 +44,7 @@ class BalanceForecast {
             }
         }
 
+        // console.log(forecastRecords)
         return forecastRecords
     }
 }

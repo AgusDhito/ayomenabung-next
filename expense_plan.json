@@ -1,0 +1,50 @@
+{
+    "command": "How much income should I earn to comfortably running my finance plan below when living in South Jakarta, Indonesia? Is the plan already make sense, or is there any recommendation you can give?",
+    "lifestyle": "luxury",
+    "data" : {
+        "monthly_expenses": [
+            {
+                "name": "Samudra",
+                "category": "Housing",
+                "currency": "IDR",
+                "amount": 3000000
+            },
+            {
+                "name": "XL Prioritas",
+                "category": "Services & Utilities",
+                "currency": "IDR",
+                "amount": 111000
+            },
+            {
+                "name": "Internet Biznet",
+                "category": "Services & Utilities",
+                "currency": "IDR",
+                "amount": 416250
+            },
+            {
+                "name": "Badminton ",
+                "category": "Skills",
+                "currency": "IDR",
+                "amount": 815000
+            },
+            {
+                "name": "Fuel",
+                "category": "Transportation",
+                "currency": "IDR",
+                "amount": 680050
+            },
+            {
+                "name": "Restaurants & Cafes",
+                "category": "Entertainment & Leisures",
+                "currency": "IDR",
+                "amount": 2000000
+            },
+            {
+                "name": "Groceries",
+                "category": "Groceries",
+                "currency": "IDR",
+                "amount": 1000000
+            }
+        ]       
+    }
+}
